@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-// const contactSchema = new Schema(
+
 export const ContactsCollection = new Schema(
 {
     name: {
@@ -31,33 +31,3 @@ export const ContactsCollection = new Schema(
   },
 );
 
-// const contactsSchema = new Schema(
-//   {
-//     name: {
-//       type: String,
-//       required: true,
-//     },
-//     age: {
-//       type: Number,
-//       required: true,
-//     },
-//     gender: {
-//       type: String,
-//       required: true,
-//       enum: ['male', 'female', 'other'],
-//     },
-//     avgMark: {
-//       type: Number,
-//       required: true,
-//     },
-//     onDuty: {
-//       type: Boolean,
-//       required: true,
-//       default: false,
-//     },
-//   },
-//   {
-//     timestamps: true,
-//     versionKey: false,
-//   },
-// );

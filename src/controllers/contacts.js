@@ -5,22 +5,10 @@ import {
   deleteContact,
   updateContact,
 } from '../services/contacts.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 import createHttpError from 'http-errors';
 
-
-export const getContactsController = async (req, res, next) => {
-  try {
-    const contacts = await getAllContacts();
-
-    res.json({
-      status: 200,
-      message: "Successfully found contacts!",
-      data: contacts,
-    });
-  } catch (err) {
-    next(err);
-  }
-}
 
 export const getContactsByIdController = async (req, res) => {
     const { contactsId } = req.params;
@@ -99,3 +87,59 @@ export const patchContactController = async (req, res, next) => {
     data: result.contact,
   });
 };
+
+export const getContactsController = async (req, res, next) => {
+  try {
+    const { page, perPage } = parsePaginationParams(req.query);
+
+    const { sortBy, sortOrder } = parseSortParams(req.query);
+
+    const contacts = await getAllContacts({
+      page,
+      perPage,
+      sortBy,
+      sortOrder,
+    });
+
+    res.json({
+      status: 200,
+      message: 'Successfully found contacts!',
+      data: contacts,
+    });
+  } catch (err) {
+     next(err);
+   }
+};
+
+
+
+
+
+
+// export const getContactsController = async (req, res) => {
+//   const { page, perPage } = parsePaginationParams(req.query);
+//   const contacts = await getAllContacts({
+//     page,
+//     perPage,
+//   });
+
+//   res.json({
+//     status: 200,
+//     message: 'Successfully found contacts!',
+//     data: contacts,
+//   });
+// };
+
+// export const getContactsController = async (req, res, next) => {
+//   try {
+//     const contacts = await getAllContacts();
+
+//     res.json({
+//       status: 200,
+//       message: "Successfully found contacts!",
+//       data: contacts,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// }

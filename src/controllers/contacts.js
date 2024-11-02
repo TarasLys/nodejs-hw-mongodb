@@ -7,6 +7,7 @@ import {
 } from '../services/contacts.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 import createHttpError from 'http-errors';
 
 
@@ -81,6 +82,7 @@ export const patchContactController = async (req, res, next) => {
     return;
   }
 
+
   res.json({
     status: 200,
     message: `Successfully patched a contact!`,
@@ -94,11 +96,15 @@ export const getContactsController = async (req, res, next) => {
 
     const { sortBy, sortOrder } = parseSortParams(req.query);
 
+    parseSortParams(req.query);
+  const filter = parseFilterParams(req.query);
+
     const contacts = await getAllContacts({
       page,
       perPage,
       sortBy,
       sortOrder,
+      filter,
     });
 
     res.json({

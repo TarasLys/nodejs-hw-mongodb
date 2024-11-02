@@ -121,31 +121,3 @@ export const getContactsController = async (req, res, next) => {
 
 
 
-
-// export const getContactsController = async (req, res) => {
-//   const { page, perPage } = parsePaginationParams(req.query);
-//   const contacts = await getAllContacts({
-//     page,
-//     perPage,
-//   });
-
-//   res.json({
-//     status: 200,
-//     message: 'Successfully found contacts!',
-//     data: contacts,
-//   });
-// };
-
-// export const getContactsController = async (req, res, next) => {
-//   try {
-//     const contacts = await getAllContacts();
-
-//     res.json({
-//       status: 200,
-//       message: "Successfully found contacts!",
-//       data: contacts,
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// }

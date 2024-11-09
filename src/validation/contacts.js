@@ -6,6 +6,7 @@ export const createContactSchema = Joi.object({
     'string.min': 'Username should have at least {#limit} characters',
     'string.max': 'Username should have at most {#limit} characters',
     'any.required': 'Username is required',
+
   }),
   phoneNumber: Joi.string().pattern(/^[0-9]{10,15}$/).min(3).max(20).required().messages({
     'string.pattern.base': 'Phone number should contain only digits and be between 10 and 15 characters long',
@@ -20,6 +21,7 @@ export const createContactSchema = Joi.object({
     'any.only': 'Contact type must be one of work, home, or personal',
     'any.required': 'Contact type is required',
   }),
+  
 });
 
 
@@ -30,4 +32,5 @@ export const updateContactSchema = Joi.object({
   isFavourite: Joi.boolean().default(false),
   contactType: Joi.string().valid('work', 'home', 'personal'),
 });
+
 

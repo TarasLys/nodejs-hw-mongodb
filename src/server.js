@@ -10,7 +10,6 @@ import cookieParser from 'cookie-parser';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 dotenv.config();
 
-
 const PORT = Number(env('PORT', '3000'));
 
 export const startServer = () => {

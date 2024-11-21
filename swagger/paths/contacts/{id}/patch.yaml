@@ -1,0 +1,74 @@
+tags:
+  - Contacts
+summary: Update contact
+operationId: updateContact
+description: 'Update a contact with provided payload'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        minProperties: 1
+        properties:
+          name:
+            description: "Contact's name"
+            type: string
+            example: 'Stephen King'
+          phoneNumber:
+            description: "Contact's phone number"
+            type: string
+            example: '+485665564'
+          contactType:
+            description: "Contact's type"
+            type: string
+            enum:
+              - work
+              - home
+              - personal
+            example: 'work'
+          email:
+            description: "Contact's email"
+            type: string
+            format: email
+            example: 'user@gmail.com'
+          isFavourite:
+            description: 'Whether the contact is a favourite'
+            type: boolean
+            example: false
+          photo:
+            description: "Contact's photo"
+            type: string
+            format: binary
+responses:
+  '201':
+    description: Contact successfully updated
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully updated the contact!
+            data:
+              type: object
+              $ref: '../../../components/schemas/contact.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
